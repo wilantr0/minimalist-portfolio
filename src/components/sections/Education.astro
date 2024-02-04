@@ -1,0 +1,50 @@
+---
+import Section from "../Section.astro";
+
+import { education } from "@cv";
+---
+
+<Section title="Education">
+  {
+    education.map(({ institution, url, area, courses, startDate, endDate }) => {
+      return (
+        <div>
+          <span>
+            <section>
+              {url ? (
+                <a href={url} target="_blank">
+                  <h3>{institution}</h3>
+                </a>
+              ) : (
+                <h3 />
+              )}
+              {area && <h4> - {area}</h4>}
+            </section>
+            <section>
+              {startDate}
+              {endDate ? ` - ${endDate}` : " - ..."}
+            </section>
+          </span>
+          <p>{courses}</p>
+        </div>
+      );
+    })
+  }
+</Section>
+
+<style>
+  span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+  }
+  a {
+    color: #000;
+  }
+</style>

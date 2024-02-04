@@ -1,0 +1,97 @@
+---
+import Section from "../Section.astro";
+import { projects } from "@cv";
+---
+
+<Section title="Projects">
+  <ul class="container">
+    {
+      projects.map(({ url, name, description, highlights, isActive }) => {
+        return (
+          <li>
+            <article>
+              <header>
+                <span>
+                  <a
+                    title={`Ver el proyecto ${name}`}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h3>{name}</h3>
+                  </a>
+
+                  <p class="active">{isActive ? "🟢" : "🔴"}</p>
+                </span>
+                <p>{description}</p>
+              </header>
+              <footer>
+                <ul>
+                  {highlights.map((highlight) => {
+                    return <li>{highlight}</li>;
+                  })}
+                </ul>
+              </footer>
+            </article>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Section>
+
+<style>
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  article {
+    padding: 10px 10px;
+    border: 2px solid #bbb;
+    border-radius: 8px;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  footer > ul {
+    font-size: 0.8rem;
+  }
+
+  footer > ul > li {
+    background-color: #bbb;
+    width: fit-content;
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+  }
+
+  a {
+    color: #000;
+  }
+
+  ul {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .active {
+    font-size: 0.5rem;
+  }
+</style>
